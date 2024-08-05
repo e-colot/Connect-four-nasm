@@ -15,6 +15,7 @@ section .text
 
     global _start                            ; to use gcc
     global END_GAME
+    global RETURN
     global actualPlayerGrid
     global gridA
     global gridB
@@ -27,6 +28,9 @@ section .text
         PRNT startmsg, lenstartmsg
         CALL SHOW_GRID
         JMP LAUNCH_A_TURN
+
+    RETURN:
+        RET
 
     END_GAME:       
         MOV eax, SYS_EXIT

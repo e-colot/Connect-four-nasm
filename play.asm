@@ -56,13 +56,16 @@ section .text
     global LAUNCH_A_TURN
     global linePos
     global rowPos
+    global CHECK_GRID
 
     extern CHECK_FOR_WIN
     extern SHOW_GRID
     extern END_GAME
+    extern RETURN
     extern gridA
     extern gridB
     extern actualPlayerGrid
+    extern statusFlags
 
     CHECK_GRID:
         MOV bl, [rowPos]
@@ -83,7 +86,7 @@ section .text
         MOV al, [linePos]
         DEC al
         MOV [linePos], al
-        JNS CHECK_GRID                        ; if linePos < 0
+        JNS CHECK_GRID                       ; if linePos < 0
         JMP INVALID_MOVE
 
     ADD_TO_GRID:
@@ -101,6 +104,9 @@ section .text
         JMP NEXT_ROUND
 
     NEXT_ROUND:
+        MOV al, [statusFlags]
+        TEST al, 0b00000001                  ; if it's an algorithm virtual move
+        JNZ RETURN
         CALL SHOW_GRID
         CALL CHECK_FOR_WIN
         MOV esi, [actualPlayerGrid]

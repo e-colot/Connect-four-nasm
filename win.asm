@@ -23,20 +23,20 @@ section .text
     global CHECK_FOR_WIN
 
     extern END_GAME
+    extern RETURN
+    extern ALGO_WIN_SCENARIO
     extern gridA
     extern gridB
     extern actualPlayerGrid
     extern linePos
     extern rowPos
+    extern statusFlags
 
     CHECK_FOR_WIN:
         CALL H_WIN
         CALL V_WIN
         CALL SLANT1_WIN
         CALL SLANT2_WIN
-        RET
-
-    RETURN:
         RET
 
     COUNT_1:                                 ; with the total in dl, the count in cl and the byte in al
@@ -159,6 +159,9 @@ section .text
         RET
 
     WIN:
+        MOV al, [statusFlags]
+        TEST al, 0b00000001
+        JNZ ALGO_WIN_SCENARIO
         PRNT endmsg, lenendmsg
         JMP END_GAME
 

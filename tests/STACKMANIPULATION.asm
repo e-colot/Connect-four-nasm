@@ -32,5 +32,5 @@ section .text
         CALL F2
         PRNT msg1, lenmsg1
     F2:
-        ADD esp, 4                           ; removes 32 bits (for x32 architecture) to stack pointer
+        ADD esp, 4                           ; removes 32 bits to stack pointer
         RET
