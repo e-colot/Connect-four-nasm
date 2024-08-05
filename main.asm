@@ -8,6 +8,8 @@ section .data
     gridB TIMES 6 DB 0b00000000
     startmsg DB 'start of the game', 0xA, 0xD
     lenstartmsg EQU $ - startmsg
+    statusFlags DB 0                         ; will be used to store some true/false status
+    ;0b0000000X is true if the algorithm is making virtual moves
 
 section .text
 
@@ -16,6 +18,7 @@ section .text
     global actualPlayerGrid
     global gridA
     global gridB
+    global statusFlags
 
     extern SHOW_GRID
     extern LAUNCH_A_TURN

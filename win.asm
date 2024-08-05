@@ -68,16 +68,6 @@ section .text
         ADD esi, ebx
         MOV al, [esi]
         MOV [lineBuffer], al
-;   0x804a078 <lineBuffer>:       01001110
-;   Should be : 00001111 (or smth like it)
-; for the grid :
-;   *  *  *  *  *  *  *  
-;   *  *  *  *  *  *  *  
-;   *  O  *  *  *  *  *  
-;   O  O  O  *  *  *  *  
-;   O  O  O  *  *  *  *  
-;   O  O  O  *  *  *  *
-
         JMP END_CHECK
 
     V_WIN:                                   ; checks for | win
